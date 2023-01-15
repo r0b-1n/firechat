@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate } from "react-router-dom"
 import { signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -32,9 +32,7 @@ function Home() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       uid = user.uid;
-      console.log("Logged in as uid: " + uid)
     } else {
-      console.log("No user logged in.")
       navigate("/")    
     }
   });
@@ -48,7 +46,7 @@ function Home() {
     }
   }
 
-  async function getdata() {
+  /*async function getdata() {
     const docRef = doc(db, "user", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -58,9 +56,9 @@ function Home() {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
-  }
+  }*/
 
-  getdata()
+  //getdata()
 
   async function Chat () {
     await setDoc(doc(db, "messages", uid+userin), {
@@ -70,33 +68,22 @@ function Home() {
 
   //
 
-  const locale = 'de';
-  const [today, setDate] = React.useState(new Date()); // Save the current date to be able to trigger an update
+    let time = new Date().toLocaleTimeString();
+    const [Time, setTime] = useState(time);
 
-  React.useEffect(() => {
-      const timer = setInterval(() => { // Creates an interval which will update the current data every minute
-      // This will trigger a rerender every component that uses the useDate hook.
-      setDate(new Date());
-    }, 60 * 1000);
-    return () => {
-      clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+    const updateTime = () => {
+      let time = new Date().toLocaleTimeString();
+      setTime(time)
     }
-  }, []);
 
-  const day = today.toLocaleDateString(locale, { weekday: 'long' });
-  const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, { month: 'long' })}\n\n`;
-
-  const hour = today.getHours();
-  const wish = `Good ${(hour < 12 && 'Morning') || (hour < 17 && 'Afternoon') || 'Evening'}, `;
-
-  const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
+    setInterval(updateTime, 1000);
 
   //
 
   return (
     <div className="Home">
       <header className="App-header">
-        <h1>{wish} currently its {time}</h1>
+        <h1>Currently its {Time}</h1>
         <input type="text" placeholder="Enter the persons uid" onChange={(evt) =>  { userin = (evt.target.value); }}/>
         &nbsp;
         <button onClick={Chat}>Create new chat</button>
