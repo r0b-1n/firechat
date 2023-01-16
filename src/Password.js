@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { db, auth } from './App';
 
 function Password() {
 
   var email = "legado9842@themesw.com"
 
-  const auth = getAuth();
   const triggerResetEmail = async () => {
     await sendPasswordResetEmail(auth, email);
     console.log("Password reset email sent to " + email)

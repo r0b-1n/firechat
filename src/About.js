@@ -1,10 +1,8 @@
-import logo from './logo.svg';
 
 function About() {
     return (
       <div className="About">
         <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
           <h1> What tf is Neo Discord?</h1>
           <p>Neo Discord is Discord but with this cool spinning logo... It is build with React, your Account and messages are saved on Googles Firebase and thewebsite is hosted with GitHub Pages!</p>
           <h1>Why "Neo" Discord</h1>

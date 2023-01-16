@@ -1,18 +1,8 @@
 import { useNavigate, Link } from "react-router-dom"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore"; 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; 
+import { db, auth } from './App';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAPGoCZVbbeQugFq5vksbPZV3zXAXan2EE",
-  authDomain: "discord-2-52e82.firebaseapp.com",
-  projectId: "discord-2-52e82",
-  storageBucket: "discord-2-52e82.appspot.com",
-  messagingSenderId: "31766851232",
-  appId: "1:31766851232:web:5105eb05fb6006f34123c5",
-  measurementId: "G-8K45NJJM44"
-};
-const app = initializeApp(firebaseConfig);
 
 function makeid(length) {
   var result           = '';
@@ -26,10 +16,8 @@ function makeid(length) {
 
 const email = "legado9842@themesw.com" //makeid(5)+"@neo-discord.com"
 const password = makeid(10)+"neo-discord"
-const auth = getAuth();
 
 async function document() {
-  const db = getFirestore(app);
   const user = auth.currentUser;
   const uid = user.uid;
   await setDoc(doc(db, "user", uid), {
@@ -42,9 +30,8 @@ async function document() {
 function Welcome() {
 
   const navigate = useNavigate();
-  const auth = getAuth();
 
-  function create() {
+  function CreateNewUser() {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -65,7 +52,7 @@ function Welcome() {
       <header className="App-header">
           <h1>Neo Discord</h1>
           &nbsp;
-          <button onClick={create}>Open Neo Discord in your browser</button>
+          <button onClick={CreateNewUser}>Open Neo Discord in your browser</button>
           &nbsp;
           <Link className="App-link" to="/login"> Login with existing account </Link>
       </header>
