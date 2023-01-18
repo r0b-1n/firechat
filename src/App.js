@@ -28,7 +28,7 @@ export const auth = getAuth(app)
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={<Main/>} />
           <Route path='/home' element={<Home/>} />
