@@ -9,12 +9,19 @@ var email;
 var password;
 var Name;
 
-  async function getdata() {
+function Home() {
+
+  const navigate = useNavigate();
+  var uid
+  var userin
+
+  const GetData = async() => {
     if (!auth.currentUser) return
     var uid = auth.currentUser.uid
     const docRef = doc(db, "user", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+      console.log(docSnap.data())
       email = docSnap.get("email")
       password = docSnap.get("password")
       Name = docSnap.get("name")
@@ -24,15 +31,6 @@ var Name;
     }
   }
 
-  getdata()
-
-function Home() {
-
-  const navigate = useNavigate();
-  var uid
-  var userin
-
-  const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
       uid = user.uid;

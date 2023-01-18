@@ -1,8 +1,8 @@
 {
-  "name": "discord 2",
-  "version": "1",
   "homepage": "http://neo-chat.github.io/neo-chat-web",
-  "private": true,
+  "name": "neochat",
+  "version": "1",
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
