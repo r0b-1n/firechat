@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/neo-chat-web/static/css/main.693f2951.css",
-    "main.js": "/neo-chat-web/static/js/main.54547266.js",
-    "static/js/787.9afbcdeb.chunk.js": "/neo-chat-web/static/js/787.9afbcdeb.chunk.js",
-    "index.html": "/neo-chat-web/index.html",
-    "main.693f2951.css.map": "/neo-chat-web/static/css/main.693f2951.css.map",
-    "main.54547266.js.map": "/neo-chat-web/static/js/main.54547266.js.map",
-    "787.9afbcdeb.chunk.js.map": "/neo-chat-web/static/js/787.9afbcdeb.chunk.js.map"
+    "main.css": "/static/css/main.693f2951.css",
+    "main.js": "/static/js/main.c4b90ea1.js",
+    "static/js/787.9afbcdeb.chunk.js": "/static/js/787.9afbcdeb.chunk.js",
+    "index.html": "/index.html",
+    "main.693f2951.css.map": "/static/css/main.693f2951.css.map",
+    "main.c4b90ea1.js.map": "/static/js/main.c4b90ea1.js.map",
+    "787.9afbcdeb.chunk.js.map": "/static/js/787.9afbcdeb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.693f2951.css",
-    "static/js/main.54547266.js"
+    "static/js/main.c4b90ea1.js"
   ]
 }
