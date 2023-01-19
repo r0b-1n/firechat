@@ -7,6 +7,7 @@ import Contact from './Contact';
 import Chat from './Chat';
 import Login from './Login';
 import Password from './Password';
+import NotFound from './404';
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
@@ -37,6 +38,7 @@ function App() {
           <Route exact path='/chat' element={<Chat/>} />
           <Route exact path='/login' element={<Login/>} />
           <Route exact path='/password' element={<Password/>} />
+          <Route path="" element={<NotFound/>} />
         </Routes>
       </Router>
     </div>

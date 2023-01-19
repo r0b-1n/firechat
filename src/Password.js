@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { sendPasswordResetEmail } from "firebase/auth";
-import { db, auth } from './App';
+import { auth } from './App';
 
 function Password() {
 
