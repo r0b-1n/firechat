@@ -30,13 +30,13 @@ function App() {
     <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route exact path='/' element={<Main/>} />
-          <Route exact path='/home' element={<Home/>} />
-          <Route exact path='/about' element={<About/>} />
-          <Route exact path='/contact' element={<Contact/>} />
-          <Route exact path='/chat' element={<Chat/>} />
-          <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/password' element={<Password/>} />
+          <Route path='/' element={<Main/>} />
+          <Route path='/home' element={<Home/>} />
+          <Route path='/about' element={<About/>} />
+          <Route path='/contact' element={<Contact/>} />
+          <Route path='/chat' element={<Chat/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/password' element={<Password/>} />
         </Routes>
       </Router>
     </div>
