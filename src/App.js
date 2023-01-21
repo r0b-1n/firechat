@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Main from './Main';
 import Home from './Home';
 import About from './About';
@@ -28,7 +28,7 @@ export const auth = getAuth(app)
 function App() {
   return (
     <div className="App">
-      <Router basename={process.env.PUBLIC_URL}>
+      <HashRouter /*</div>basename={process.env.PUBLIC_URL}*/>
         <Routes>
           <Route path='/' element={<Main/>} />
           <Route path='/home' element={<Home/>} />
@@ -38,7 +38,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/password' element={<Password/>} />
         </Routes>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
