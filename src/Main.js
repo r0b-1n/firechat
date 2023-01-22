@@ -1,8 +1,12 @@
 import { useNavigate, Link } from "react-router-dom"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
-import { db, auth } from './App';
+import { db, auth, secret } from './App';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import Cookies from 'universal-cookie';
+import { decrypt } from 'n-krypta';
 
+const cookies = new Cookies();
 
 function makeid(length) {
   var result           = '';
@@ -30,6 +34,22 @@ async function document() {
 function Welcome() {
 
   const navigate = useNavigate();
+
+  var savee = cookies.get('email') //decrypt(cookies.get('email'), secret)
+  var savep = cookies.get('password') //decrypt(cookies.get('password'), secret)
+
+  function saveduser() {
+    if ( savee && savep !== undefined)
+    {
+      console.log("Found a users data in cookies")
+      signInWithEmailAndPassword(auth, savee, savep)
+        .then((userCredential) => {
+        navigate("/home")
+        })
+      }
+  }
+
+  saveduser()
 
   function CreateNewUser() {
   createUserWithEmailAndPassword(auth, email, password)

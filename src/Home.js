@@ -6,6 +6,9 @@ import { collection, limit, orderBy, query, doc, setDoc, getDoc, serverTimestamp
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useCollection } from "react-firebase-hooks/firestore"
 import {useAuthState} from 'react-firebase-hooks/auth'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 var email;
 var password;
@@ -46,6 +49,8 @@ function Home() {
     try {
       navigate("/")
       signOut(auth)
+      cookies.remove('email')
+      cookies.remove('password')
     } catch (error){
       console.log(error)
     }

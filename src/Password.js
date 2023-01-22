@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from './App';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 function Password() {
 
@@ -9,6 +12,8 @@ function Password() {
   const triggerResetEmail = async () => {
     await sendPasswordResetEmail(auth, email);
     console.log("Password reset email sent to " + email)
+    cookies.remove('email')
+    cookies.remove('password')
   }
 
     return (
