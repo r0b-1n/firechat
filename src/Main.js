@@ -55,7 +55,18 @@ function Welcome() {
           <button onClick={CreateNewUser}>Open Neo Discord in your browser</button>
           &nbsp;
           <Link className="App-link" to="/login"> Login with existing account </Link>
-      </header>
+          &nbsp;
+          <Link className="App-link" to="/about"> About page </Link>
+          <Link className="App-link" to="/contact"> Contact </Link>
+          <a
+          className="App-link"
+          href="https://github.com/neo-chat/neo-chat-web"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          Source Code
+        </a>      
+        </header>
     </div>
   );
 }

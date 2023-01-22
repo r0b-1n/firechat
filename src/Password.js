@@ -20,6 +20,8 @@ function Password() {
         <button className="button-password"  onClick={triggerResetEmail}>Reset</button>
         &nbsp;
         <Link className="App-link" to="/login"> Remembered your password? </Link>
+        &nbsp;
+        <Link className="App-link" to="/"> Remembered you don't have an account? </Link>
         </header>
       </div>
     );

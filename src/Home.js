@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import {useNavigate } from "react-router-dom"
 import { signOut } from "firebase/auth";
 import { db, auth } from './App';
-import { doc, setDoc, getDoc } from "firebase/firestore"; 
+import { collection, limit, orderBy, query, doc, setDoc, getDoc, serverTimestamp, addDoc } from "firebase/firestore"; 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useCollection } from "react-firebase-hooks/firestore"
+import {useAuthState} from 'react-firebase-hooks/auth'
 
 var email;
 var password;
 var Name;
+var username;
 
 function Home() {
 
@@ -49,7 +52,7 @@ function Home() {
   }
 
   async function Chat () {
-    await setDoc(doc(db, "messages", uid+userin), {
+    await setDoc(doc(db, "messages", uid+"neo-discord"+userin), {
       created: "Today"
     });
   }
@@ -64,16 +67,61 @@ function Home() {
 
     setInterval(updateTime, 1000);
 
+    const [user] = useAuthState(auth)
+
+  const messageRef = collection(db, "messages", "test", "1")
+  const queryRef = query(messageRef, orderBy("createdAt", "asc"), limit(20))
+  const [messages] = useCollection(queryRef, {idField: "id"})
+
+  const [formValue, setFormValue] = useState('')
+
+  const scrollTo = useRef(null)
+
+  const sendMessage = async(e) => {
+    e.preventDefault()
+    
+    const payload = {text: formValue, createdAt: serverTimestamp(), uid: user.uid}
+    await addDoc(messageRef, payload)
+    
+    setFormValue('')
+  }
+
+  function ChatMessage(props){
+    const {text, uid} = props.message
+
+    const className = uid === auth.currentUser.uid ? "sent" : "recieved"
+
+    return (
+      <div className={className}>
+        <p>{text}</p>
+      </div>
+    )
+  }
+
+  useEffect(() => {
+    scrollTo.current.scrollIntoView({behavior: "smooth"})
+  }, [messages])
+
   return (
     <div className="Home">
       <header className="App-header">
-        <h1>Hey {Name}, {email}, {password}</h1>
         <h1>Currently its {Time}</h1>
+        <p>{Name} {email} {password}</p>
         <input type="text" placeholder="Enter the persons uid" onChange={(evt) =>  { userin = (evt.target.value); }}/>
         &nbsp;
         <button onClick={Chat}>Create new chat</button>
         &nbsp;
-        <div></div>
+        <p>Your chat with</p>
+        <div className='messages'>
+          <div ref={scrollTo}></div>
+          {messages && messages.docs.map(msg => <ChatMessage key={msg.id} message={msg.data()} />)}
+        </div>
+        &nbsp;
+        <form>
+          <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+        &nbsp;
+          <button onClick={(e) => sendMessage(e)}>Send</button>
+        </form>
         &nbsp;
         <button onClick={Logout}>Logout</button>
       </header>

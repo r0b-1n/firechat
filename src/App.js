@@ -4,7 +4,6 @@ import Main from './Main';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
-import Chat from './Chat';
 import Login from './Login';
 import Password from './Password';
 
@@ -28,13 +27,12 @@ export const auth = getAuth(app)
 function App() {
   return (
     <div className="App">
-      <HashRouter /*</div>basename={process.env.PUBLIC_URL}*/>
+      <HashRouter /*basename={process.env.PUBLIC_URL}*/>
         <Routes>
           <Route path='/' element={<Main/>} />
           <Route path='/home' element={<Home/>} />
           <Route path='/about' element={<About/>} />
           <Route path='/contact' element={<Contact/>} />
-          <Route path='/chat' element={<Chat/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/password' element={<Password/>} />
         </Routes>

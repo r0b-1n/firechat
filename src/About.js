@@ -9,7 +9,7 @@ function About() {
           <p>“neos” is “new” in ancient Greek. According to this translation, "Neo" is given the meaning "something new". As you can see we are also using neon colours.</p>
           <h1>How does it work?</h1>
           <p>When you create an account you will get a random email and password. You can change your password if you want to.</p>
-          <p>When you start a chat with someone</p>
+          <p>When you start a chat with someone a document will be created in our firebase firestore with the name of your and the receivers uid. After that every chat message will be stored there with the message's text, the uid of the creator and the time the message has been send.</p>
         </header>
       </div>
     );

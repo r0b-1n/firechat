@@ -70,11 +70,11 @@ h1 {
 }
 
 .messages{
-  width: 100%;
-  height: 90%;
+  width: 50%;
+  height: 60%;
   display: flex;
   flex-direction: column-reverse;
-  background-color: white;
+  background-color: #282c34;
   align-items: center;
   overflow-y: auto;
   border: var(--border);
@@ -99,13 +99,15 @@ h1 {
 }
 
 .sent p{
-  background-color: teal;
+  background-color: #70d6ff;
   margin-right: 0.5rem;
+  border-radius: 10px;
 }
 
 .recieved p{
-  background-color: #aaa;
+  background-color: #ff9770;
   margin-left: 0.5rem;
+  border-radius: 10px;
 }
 
 button {
@@ -245,7 +247,7 @@ button:hover::before {
 ::-webkit-scrollbar {
   height: 4px;              /* height of horizontal scrollbar ← You're missing this */
   width: 4px;               /* width of vertical scrollbar */
-  border: 1px solid #d5d5d5;
+  border: 1px solid #404EED;
 }
 * {
   box-sizing: border-box;
