@@ -1,14 +1,14 @@
 import { useNavigate, Link } from "react-router-dom"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
-import { db, auth, secret } from './App';
+import { db, auth, secret, appname } from './App';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Cookies from 'universal-cookie';
 import { decrypt } from 'n-krypta';
 
-const cookies = new Cookies();
+const cookies = new Cookies();  // Cookie Manager
 
-function makeid(length) {
+function makeid(length) {   //Methode to generate a random password/email
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
@@ -18,27 +18,28 @@ function makeid(length) {
   return result;
 }
 
-const email = "legado9842@themesw.com" //makeid(5)+"@neo-discord.com"
+const email = makeid(5)+"@neo-discord.com"  // Random for now
 const password = makeid(10)+"neo-discord"
 
-async function document() {
+async function document() { // Create a user document
   const user = auth.currentUser;
   const uid = user.uid;
   await setDoc(doc(db, "user", uid), {
     email: email,
     password: password,
-    uid: uid
+    uid: uid,
+    name: "User",
   });
 }
 
 function Welcome() {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Navigator
 
-  var savee = cookies.get('email') //decrypt(cookies.get('email'), secret)
+  var savee = cookies.get('email') //decrypt(cookies.get('email'), secret)  // Cookie getter
   var savep = cookies.get('password') //decrypt(cookies.get('password'), secret)
 
-  function saveduser() {
+  function saveduser() {  // If there is a user login
     if ( savee && savep !== undefined)
     {
       console.log("Found a users data in cookies")
@@ -49,9 +50,9 @@ function Welcome() {
       }
   }
 
-  saveduser()
+  saveduser() // Methode
 
-  function CreateNewUser() {
+  function CreateNewUser() {  // User creator
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -70,9 +71,9 @@ function Welcome() {
   return (
     <div className="Welcome">
       <header className="App-header">
-          <h1>Neo Discord</h1>
+          <h1>{appname}</h1>
           &nbsp;
-          <button onClick={CreateNewUser}>Open Neo Discord in your browser</button>
+          <button onClick={CreateNewUser}>Open {appname} in your browser</button>
           &nbsp;
           <Link className="App-link" to="/login"> Login with existing account </Link>
           &nbsp;

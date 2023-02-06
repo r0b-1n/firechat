@@ -5,33 +5,28 @@ import {useNavigate, Link } from "react-router-dom"
 import Cookies from 'universal-cookie';
 import { encrypt } from 'n-krypta';
 
-
-var email
-var password
+var email;
+var password;
 
 function Login() {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Navigator
 
   function login() {
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password) // Sign in Methode
       .then((userCredential) => {
-        // Signed in 
         const user = userCredential.user;
         const cookies = new Cookies();
-        console.log(user)
+        console.log("User " + user + "has been logged in")
         cookies.set('email', email /*encrypt(email, secret)*/, { path: '/' });
         cookies.set('password', password /*encrypt(password, secret)*/, { path: '/' });
-        navigate("/home")
-        // ...
+        navigate("/home") // Final Navigate
       })
-      .catch((error) => {
+      .catch((error) => { // Error Code Handling
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
-        console.log(email)
-        console.log(password)
       });
     }
 
@@ -47,7 +42,7 @@ function Login() {
           &nbsp;
           <Link className="App-link" to="/password"> Forgot password? </Link>
           &nbsp;
-          <Link className="App-link" to="/"> Register </Link>
+          <Link className="App-link" to="/"> Don't have a account yet? </Link>
         </header>
       </div>
     );
