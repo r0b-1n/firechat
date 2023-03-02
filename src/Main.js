@@ -71,7 +71,8 @@ function Welcome() {
   return (
     <div className="Welcome">
       <header className="App-header">
-          <h1>{appname}</h1>
+          <h1>FireChat</h1>
+          <h2>A chat made with 🔥firebase and react</h2>
           &nbsp;
           <button onClick={CreateNewUser}>Open {appname} in your browser</button>
           &nbsp;
@@ -86,7 +87,7 @@ function Welcome() {
           rel="noopener noreferrer"
           >
           Source Code
-        </a>      
+          </a>
         </header>
     </div>
   );

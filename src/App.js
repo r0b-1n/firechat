@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig)
 
 export const db = getFirestore(app)
 export const auth = getAuth(app)
-export const appname = "App Name"
+export const appname = "FireChat"
 export const secret = "OúÉùÑ;M½©êã\¸Ê@óDhúS·ÿûøaWòøÀWaó;´Æ¬k;¸ví]2pe³g@»üY;Hõ:ªOPò5Äd¸d³âç9/8Saï«º2RÜ¿ËÓ[¥U^«½ñQ+øõ®h³i¹ÐÅZ}g%A¤âjÚÖ5p³¢ËöXãØF·õ¢Vúuågÿ"
 
 function App() {
