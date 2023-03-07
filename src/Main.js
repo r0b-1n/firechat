@@ -5,6 +5,8 @@ import { db, auth, secret, appname } from './App';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Cookies from 'universal-cookie';
 import { decrypt } from 'n-krypta';
+import { TypeAnimation } from 'react-type-animation';
+
 
 const cookies = new Cookies();  // Cookie Manager
 
@@ -72,7 +74,25 @@ function Welcome() {
     <div className="Welcome">
       <header className="App-header">
           <h1>FireChat</h1>
-          <h2>A chat made with 🔥firebase and react</h2>
+
+          <TypeAnimation
+          sequence={[
+            'A webchat made with 🔥firebase', // Types 'One'
+            1000, // Waits 1s
+            'A webchat made with react', // Deletes 'One' and types 'Two'
+            1000,
+            'The perfect place to talk to your friends', // Deletes 'One' and types 'Two'
+            1000,
+            () => {
+              console.log('Done typing!'); // Place optional callbacks anywhere in the array
+            }
+          ]}
+          wrapper="div"
+          cursor={true}
+          repeat={Infinity}
+          style={{ fontSize: '2em' }}
+          />
+
           &nbsp;
           <button onClick={CreateNewUser}>Open {appname} in your browser</button>
           &nbsp;

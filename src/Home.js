@@ -25,15 +25,23 @@ const GetData = async() => {
   const docRef = doc(db, "user", uid);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    console.log(docSnap.data())
-    email = docSnap.get("email")
-    password = docSnap.get("password")
     Name = docSnap.get("name")
+    cookies.set('username', Name /*encrypt(password, secret)*/, { path: '/' });
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
   }
 }
+
+GetData()
+
+const DisplayData = async() => {
+  email = cookies.get('email') //decrypt(cookies.get('email'), secret)  // Cookie getter
+  password = cookies.get('password') //decrypt(cookies.get('password'), secret)
+  username = cookies.get('username') //decrypt(cookies.get('username'), secret)  // Cookie getter
+}
+
+DisplayData()
 
 function Home() {
 
@@ -78,7 +86,7 @@ function Home() {
 
     const [user] = useAuthState(auth)
 
-  const messageRef = collection(db, "messages", chat, "messages")
+  const messageRef = collection(db, "messages", "_official", "messages")
   const queryRef = query(messageRef, orderBy("createdAt", "asc"), limit(20))
   const [messages] = useCollection(queryRef, {idField: "id"})
   console.log("Messages")
@@ -114,36 +122,17 @@ function Home() {
     scrollTo.current.scrollIntoView({behavior: "smooth"})
   }, [messages])
 
-  const selectOptions = [ // Chat options
-    { value: "_official", label: "Neo Chat" },
-    { value: "S9Rh6QK8KaPJevLF1WW7775rlTt2-eskXLZ9jXSbSOVwxagsPrABDwlq1", label: "Robin" }
-  ];
-
   const [userChoice, setUserChoice] = useState("");
   
-  var chatter
-
   chat = userChoice.value;
-  chatter = userChoice.label;
+  //chatter = userChoice.label;
 
   return (
     <div className="Home">
       <header className="App-header">
-        <p>{Name} {email} {password}</p>
-        <input type="text" placeholder="Enter the persons uid" onChange={(evt) =>  { userin = (evt.target.value); }}/>
-        &nbsp;
-        <button onClick={Chat}>Create new chat</button>
-        &nbsp;
+        <p>{email} {password}</p>
 
-        <Select
-        isClearable={false}
-        className="react-select"
-        classNamePrefix="select"
-        options={selectOptions}
-        onChange={(chioce) => setUserChoice(chioce)}
-        />
-
-        <p>Your chat with {chatter}</p>
+        <p>Welcome {username}</p>
         <div className='messages'>
           <div ref={scrollTo}></div>
           {messages && messages.docs.map(msg => <ChatMessage key={msg.id} message={msg.data()} />)}
