@@ -77,14 +77,14 @@ function Welcome() {
 
           <TypeAnimation
           sequence={[
-            'A webchat made with 🔥firebase', // Types 'One'
-            1000, // Waits 1s
-            'A webchat made with react', // Deletes 'One' and types 'Two'
+            'Hallo',
             1000,
-            'The perfect place to talk to your friends', // Deletes 'One' and types 'Two'
+            'Wilkommen',
+            1000,
+            'Hi',
             1000,
             () => {
-              console.log('Done typing!'); // Place optional callbacks anywhere in the array
+              console.log('TypeAnimation Loop fertig!');
             }
           ]}
           wrapper="div"
@@ -94,15 +94,15 @@ function Welcome() {
           />
 
           &nbsp;
-          <button onClick={CreateNewUser}>Open {appname} in your browser</button>
+          <button onClick={CreateNewUser}>Öffne {appname} in deinem Browser</button>
           &nbsp;
-          <Link className="App-link" to="/login"> Login with existing account </Link>
+          <Link className="App-link" to="/login"> Login mit einem existierenden Account </Link>
           &nbsp;
-          <Link className="App-link" to="/about"> About page </Link>
-          <Link className="App-link" to="/contact"> Contact </Link>
+          <Link className="App-link" to="/about"> Über FireChat </Link>
+          <Link className="App-link" to="/contact"> Kontakt </Link>
           <a
           className="App-link"
-          href="https://github.com/neo-chat/neo-chat-web"
+          href="https://github.com/fire-chat-web/firechat"
           target="_blank"
           rel="noopener noreferrer"
           >
