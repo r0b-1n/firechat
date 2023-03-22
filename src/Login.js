@@ -33,16 +33,16 @@ function Login() {
     return (
       <div className="Login">
         <header className="App-header">
-          <h1 className="login">Welcome back!</h1>
+          <h1 className="login">Willkommen zurück!</h1>
           <input type="text" placeholder="E-Mail" onChange={(evt) =>  { email = (evt.target.value); }}/>
           &nbsp;
-          <input type="password" placeholder="Password" onChange={(evt) =>  { password = (evt.target.value); }}/>
+          <input type="password" placeholder="Passwort" onChange={(evt) =>  { password = (evt.target.value); }}/>
           &nbsp;
           <button className="button-login" onClick={login}>Login</button>
           &nbsp;
-          <Link className="App-link" to="/password"> Forgot password? </Link>
+          <Link className="App-link" to="/password"> Passwort vergessen? </Link>
           &nbsp;
-          <Link className="App-link" to="/"> Don't have a account yet? </Link>
+          <Link className="App-link" to="/"> Noch keinen Account? </Link>
         </header>
       </div>
     );

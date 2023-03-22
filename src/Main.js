@@ -79,7 +79,7 @@ function Welcome() {
           sequence={[
             'Hallo',
             1000,
-            'Wilkommen',
+            'Willkommen',
             1000,
             'Hi',
             1000,
