@@ -83,6 +83,10 @@ function Welcome() {
             1000,
             'Hi',
             1000,
+            'Moin',
+            1000,
+            'Servus',
+            1000,
             () => {
               console.log('TypeAnimation Loop fertig!');
             }

@@ -7,7 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useCollection } from "react-firebase-hooks/firestore"
 import {useAuthState} from 'react-firebase-hooks/auth'
 import Cookies from 'universal-cookie';
-import Select from "react-select";
+import { TypeAnimation } from 'react-type-animation';
 
 const cookies = new Cookies();
 
@@ -86,8 +86,8 @@ function Home() {
 
     const [user] = useAuthState(auth)
 
-  const messageRef = collection(db, "messages", "_official", "messages")
-  const queryRef = query(messageRef, orderBy("createdAt", "asc"), limit(20))
+  const messageRef = collection(db, "messages", "chat", "messages")
+  const queryRef = query(messageRef, orderBy("createdAt", "desc"), limit(20))
   const [messages] = useCollection(queryRef, {idField: "id"})
   console.log("Messages")
 
@@ -98,14 +98,14 @@ function Home() {
   const sendMessage = async(e) => { // Message send Methode 
     e.preventDefault()
     
-    const payload = {text: formValue, createdAt: serverTimestamp(), uid: user.uid}
+    const payload = {text: formValue, createdAt: serverTimestamp(), uid: user.uid, name: "Robin"}
     await addDoc(messageRef, payload)
     
     setFormValue('')
   }
 
   function ChatMessage(props){  // Chat message getter?
-    const {text, uid} = props.message
+    const {text, uid, name} = props.message
 
     const className = uid === auth.currentUser.uid ? "sent" : "recieved"
 
@@ -113,6 +113,7 @@ function Home() {
 
     return (
       <div className={className}>
+        <p>{name}:</p>
         <p>{text}</p>
       </div>
     )
@@ -130,18 +131,21 @@ function Home() {
   return (
     <div className="Home">
       <header className="App-header">
-        <p>{email} {password}</p>
 
-        <p>Welcome {username}</p>
+        <p> Email: {email} </p>
+        <p>Passwort: {password}</p>
+        <p>Willkommen, {username}</p>
+
         <div className='messages'>
           <div ref={scrollTo}></div>
           {messages && messages.docs.map(msg => <ChatMessage key={msg.id} message={msg.data()} />)}
         </div>
+
         &nbsp;
         <form>
-          <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+          <input value={formValue} placeholder="Nachricht" onChange={(e) => setFormValue(e.target.value)} />
         &nbsp;
-          <button onClick={(e) => sendMessage(e)}>Send</button>
+          <button onClick={(e) => sendMessage(e)}>Senden</button>
         </form>
         &nbsp;
         <button onClick={Logout}>Logout</button>
