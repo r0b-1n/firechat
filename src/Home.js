@@ -15,6 +15,7 @@ var password;
 var Name;
 var username;
 var email;
+var userid;
 
 var chat = "_official";
 
@@ -39,6 +40,7 @@ const DisplayData = async() => {
   email = cookies.get('email') //decrypt(cookies.get('email'), secret)  // Cookie getter
   password = cookies.get('password') //decrypt(cookies.get('password'), secret)
   username = cookies.get('username') //decrypt(cookies.get('username'), secret)  // Cookie getter
+  userid = cookies.get('uid')
 }
 
 DisplayData()
@@ -63,6 +65,8 @@ function Home() {
       signOut(auth)
       cookies.remove('email')
       cookies.remove('password')
+      cookies.remove('uid')
+      cookies.remove('username')
     } catch (error){
       console.log(error)
     }
@@ -98,7 +102,7 @@ function Home() {
   const sendMessage = async(e) => { // Message send Methode 
     e.preventDefault()
     
-    const payload = {text: formValue, createdAt: serverTimestamp(), uid: user.uid, name: "Robin"}
+    const payload = {text: formValue, createdAt: serverTimestamp(), uid: user.uid, name: 'User'}
     await addDoc(messageRef, payload)
     
     setFormValue('')
@@ -113,8 +117,7 @@ function Home() {
 
     return (
       <div className={className}>
-        <p>{name}:</p>
-        <p>{text}</p>
+        <p>{name}: {text}</p>
       </div>
     )
   }
@@ -134,7 +137,7 @@ function Home() {
 
         <p> Email: {email} </p>
         <p>Passwort: {password}</p>
-        <p>Willkommen, {username}</p>
+        <p>Willkommen, User</p>
 
         <div className='messages'>
           <div ref={scrollTo}></div>

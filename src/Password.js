@@ -14,6 +14,8 @@ function Password() {
     console.log("Password reset email sent to " + email)
     cookies.remove('email')
     cookies.remove('password')
+    cookies.remove('username')
+    cookies.remove('uid')
   }
 
     return (

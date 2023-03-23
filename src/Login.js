@@ -13,13 +13,15 @@ function Login() {
   const navigate = useNavigate(); // Navigator
 
   function login() {
+
     signInWithEmailAndPassword(auth, email, password) // Sign in Methode
       .then((userCredential) => {
         const user = userCredential.user;
         const cookies = new Cookies();
-        console.log("User " + user + "has been logged in")
+        console.log("User " + user.uid + "has been logged in")
         cookies.set('email', email /*encrypt(email, secret)*/, { path: '/' });
         cookies.set('password', password /*encrypt(password, secret)*/, { path: '/' });
+        cookies.set('uid', user.uid /*encrypt(password, secret)*/, { path: '/' });
         navigate("/home") // Final Navigate
       })
       .catch((error) => { // Error Code Handling

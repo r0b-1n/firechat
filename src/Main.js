@@ -20,8 +20,9 @@ function makeid(length) {   //Methode to generate a random password/email
   return result;
 }
 
-const email = makeid(5)+"@neo-discord.com"  // Random for now
-const password = makeid(10)+"neo-discord"
+const email = makeid(5)+"@firechat.com"  // Random for now
+const password = makeid(20)
+const username = makeid(5)
 
 async function document() { // Create a user document
   const user = auth.currentUser;
@@ -30,8 +31,12 @@ async function document() { // Create a user document
     email: email,
     password: password,
     uid: uid,
-    name: "User",
+    name: username,
   });
+  cookies.set('email', email /*encrypt(email, secret)*/, { path: '/' });
+  cookies.set('password', password /*encrypt(password, secret)*/, { path: '/' });
+  cookies.set('username', username /*encrypt(email, secret)*/, { path: '/' });
+  cookies.set('uid', uid /*encrypt(email, secret)*/, { path: '/' });
 }
 
 function Welcome() {
